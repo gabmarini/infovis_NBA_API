@@ -5,7 +5,7 @@ var router = express.Router();
 var MongoClient = require('mongodb').MongoClient;
 
 // Connect to the db
-MongoClient.connect("mongodb://localhost:27017/basketball_reference", function(err, db) {
+MongoClient.connect("mongodb://test:test@ds143532.mlab.com:43532/basketball_reference", function(err, db) {
   if(!err) {
     console.log("We are connected");
   } else {
