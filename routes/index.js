@@ -12,7 +12,6 @@ MongoClient.connect("mongodb://test:test@ds143532.mlab.com:43532/basketball_refe
   	console.log('error on connection')
   }
 
-	/* GET states. */
 	router.get('/states', function(req, res, next) {
 		var collection = db.collection('states');
 		collection.find().toArray(function(e, result){
@@ -30,6 +29,13 @@ MongoClient.connect("mongodb://test:test@ds143532.mlab.com:43532/basketball_refe
 	router.get('/players/college/:college', function(req, res, next){
 		var collection = db.collection('players')
 		collection.find({'college': req.params.college}).toArray(function (e, result){
+			res.jsonp(result)
+		})
+	})
+
+	router.get('/players/name/:name', function(req, res, next){
+		var collection= db.collection('players')
+		collection.findOne({name:{$regex: 'kareem abdul-jabbar', $options: 'i'}}, function(e, result){
 			res.jsonp(result)
 		})
 	})
