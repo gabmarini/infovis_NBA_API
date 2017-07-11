@@ -40,6 +40,13 @@ MongoClient.connect("mongodb://test:test@ds143532.mlab.com:43532/basketball_refe
 		})
 	})
 
+	router.get('/players/list/:name_substring', function(req, res, next){
+		var collection = db.collection('players')
+		collection.find({name:{$regex: req.params.name_substring, $options: 'i'}}).sort({'score':-1}).toArray(function(e, result){
+			res.jsonp(result)
+		})
+	})
+
 	router.get('/players/:pid', function(req, res, next){
 	  	var collection = db.collection('basketball_reference')
 			collection.findOne({'player_id': req.params.pid}, function (e, result){
