@@ -35,7 +35,7 @@ MongoClient.connect("mongodb://test:test@ds143532.mlab.com:43532/basketball_refe
 
 	router.get('/players/name/:name', function(req, res, next){
 		var collection= db.collection('players')
-		collection.findOne({name:{$regex: req.params.name, $options: 'i'}}, function(e, result){
+		collection.findOne({name:{$regex: '^' + req.params.name + '$', $options: 'i'}}, function(e, result){
 			res.jsonp(result)
 		})
 	})
